@@ -222,7 +222,11 @@ const generateButtons = () => {
         let currentValue = Number.parseFloat(display.value)
         operandTwo = currentValue
         let historyEntry = `${operandOne} ${operator} ${operandTwo} = `
-        answer = calculate(operandOne,operator,operandTwo)
+        if(operator != '%'){
+            answer = calculate(operandOne,operator,operandTwo)
+        }else{
+            answer = (operandOne * operandTwo) / 100
+        }
         historyEntry += answer.toString()
         history.unshift(historyEntry)
         updateHistoryDisplay()
