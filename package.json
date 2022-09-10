@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Weekend js calculator",
   "main": "calc.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "serve ./"
+    "start": "node app.js"
   },
   "keywords": [
     "Calculator",
@@ -15,5 +16,8 @@
   "author": "Aldanis Vigo",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "url": "^0.11.0"
   }
 }
