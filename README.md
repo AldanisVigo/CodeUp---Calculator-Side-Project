@@ -11,4 +11,4 @@ I created this project under the direction of Kenneth Howell my instructor at Co
 3. Run the project with "serve ./" from the root of the project
 
 
-## Thanks for reading!
+## Thanks for reading! And Keep on Coding!
