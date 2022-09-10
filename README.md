@@ -1,6 +1,6 @@
 # Vanilla JS Calculator for CodeUp Java Cohort
 
-![](calc.png)
+![](calc.gif)
 
 I created this project under the direction of Kenneth Howell my instructor at CodeUp Java Cohort as a side project.
 
