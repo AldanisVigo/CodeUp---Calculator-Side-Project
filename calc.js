@@ -75,6 +75,38 @@ const calculate = (num,oper,den) => {
     }
 }
 
+const processOperator = (oper) => {
+    if(operandOne != null && operator == null && operandTwo == null){
+        operandOne = Number.parseFloat(display.value)
+        operator = oper
+        display.value = null
+    }else if(operandOne == null && operator == null && operandTwo == null && answer != null){
+        if(Number.parseFloat(display.value) != answer){
+            operandOne = Number.parseFloat(display.value)
+        }else{
+            operandOne = answer
+        }
+
+        answer = null
+        operandTwo = null
+        operator = oper
+        display.value = null
+    }else if(operandOne != null && operator != null && display.value != null && answer == null){
+        let historyEntry = `${operandOne} ${operator} ${Number.parseFloat(display.value)}`
+        operandOne = calculate(operandOne,operator,Number.parseFloat(display.value))
+        historyEntry += ` = ${operandOne}`
+        history.unshift(historyEntry)
+        updateHistoryDisplay()
+        operator = oper
+        display.value = null
+    }else if(operandOne == null && operandTwo == null && operator == null && answer == null){
+        operandOne = Number.parseFloat(display.value)
+        operator = oper
+        display.value = null
+    }
+    decimalPresent = false
+}
+
 /*
     Generate the buttons
 */
@@ -138,35 +170,7 @@ const generateButtons = () => {
     divideButton.className = 'btn_orange'
     divideButton.style.gridArea = 'btn_div'
     divideButton.textContent = '÷'
-    divideButton.onclick = () => {
-        if(operandOne != null && operator == null && operandTwo == null){
-            operandOne = Number.parseFloat(display.value)
-            operator = '/'
-            display.value = null
-        }else if(operandOne == null && operator == null && operandTwo == null && answer != null){
-            operandOne = answer
-            answer = null
-            operandTwo = null
-            operator = '/'
-            display.value = null
-        }else if(operandOne != null && operator != null && display.value != null && answer == null){
-            let historyEntry = `${operandOne} ${operator} ${Number.parseFloat(display.value)}`
-            operandOne = calculate(operandOne,operator,Number.parseFloat(display.value))
-            historyEntry += ` = ${operandOne}`
-            history.unshift(historyEntry)
-            updateHistoryDisplay()
-            operator = '/'
-            display.value = null
-        }else if(operandOne == null && operandTwo == null && operator == null && answer == null){
-            operandOne = Number.parseFloat(display.value)
-            operator = '/'
-            display.value = null
-        }
-
-        decimalPresent = false
-        console.log(operandOne + " " + operator + " " + operandTwo)
-
-    }
+    divideButton.onclick = () => processOperator('/')
     buttonsContainer.appendChild(divideButton)
 
     //multiply button
@@ -174,19 +178,7 @@ const generateButtons = () => {
     multButton.className = 'btn_orange'
     multButton.style.gridArea = 'btn_x'
     multButton.textContent = '×'
-    multButton.onclick = () => {
-        if(operandOne == null){
-            let currentValue = Number.parseFloat(display.value)
-            operandOne = currentValue
-            display.value = null
-            operator = '*'
-        }else if(answer != null){
-            operandOne = answer
-            operandTwo = 
-            operator = '*'
-        }
-        decimalPresent = false
-    }
+    multButton.onclick = () => processOperator('*')
     buttonsContainer.appendChild(multButton)
 
     //minus button
@@ -194,18 +186,7 @@ const generateButtons = () => {
     minusButton.className = 'btn_orange'
     minusButton.style.gridArea = 'btn_min'
     minusButton.textContent = '-'
-    minusButton.onclick = () => {
-        if(operandOne == null){
-            let currentValue = Number.parseFloat(display.value)
-            operandOne = currentValue
-            display.value = null
-            operator = '-'
-        }else if(answer != null){
-            operandOne = answer
-            operator = '-'
-        }
-        decimalPresent = false
-    }
+    minusButton.onclick = () => processOperator('-')
     buttonsContainer.appendChild(minusButton)
 
     //plus button
@@ -213,18 +194,7 @@ const generateButtons = () => {
     plusButton.className = 'btn_orange'
     plusButton.style.gridArea = 'btn_plus'
     plusButton.textContent = '+'
-    plusButton.onclick = () => {
-        if(operandOne == null){
-            let currentValue = Number.parseFloat(display.value)
-            operandOne = currentValue
-            display.value = null
-            operator = '+'
-        }else if(answer != null){
-            operandOne = answer
-            operator = '+'
-        }
-        decimalPresent = false
-    }
+    plusButton.onclick = () => processOperator('+')
     buttonsContainer.appendChild(plusButton)
 
 
@@ -234,8 +204,10 @@ const generateButtons = () => {
     decimalButton.style.gridArea = 'btn_dec'
     decimalButton.textContent = '.'
     decimalButton.onclick = () => {
-        display.value += '.'
-        decimalPresent = true
+        if(!decimalPresent){
+            display.value += '.'
+            decimalPresent = true
+        }
     }
     buttonsContainer.appendChild(decimalButton)
 
@@ -255,10 +227,14 @@ const generateButtons = () => {
         history.unshift(historyEntry)
         updateHistoryDisplay()
         display.value = answer
-        decimalPresent = false
         operandOne = null
         operandTwo = null
         operator = null
+        if(answer % 1 > 0){
+            decimalPresent = true
+        }else{
+            decimalPresent = false
+        }
     }  
     buttonsContainer.appendChild(equalButton)  
 
