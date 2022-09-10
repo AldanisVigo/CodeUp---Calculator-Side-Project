@@ -4,6 +4,9 @@
 
 I created this project under the direction of Kenneth Howell my instructor at CodeUp Java Cohort as a side project.
 
+## Demo
+[LIVE DEMO](https://codeup-calculator.herokuapp.com/)
+
 ## How to run it
 
 1. Download NPM [NPM DOWNLOAD](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
