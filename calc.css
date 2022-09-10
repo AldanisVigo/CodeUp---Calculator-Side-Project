@@ -1,7 +1,16 @@
+body{
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #calculator{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 100px 80px 300px;
+    text-align: center;
 }
 
 #buttons_container{
@@ -10,7 +19,18 @@
                          "btn_7 btn_8 btn_9 btn_x"
                          "btn_4 btn_5 btn_6 btn_min"
                          "btn_1 btn_2 btn_3 btn_plus"
-                         "btn_0 btn_0 btn_dec btn_equals";
+                         "btn_0 btn_0 btn_dec btn_equals"
+                         "extrafunc extrafunc extrafunc extrafunc";
+}
+
+#extrafunc{
+    background: #D6D6D6;
+    height: 100px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 8px;
 }
 
 .btn{
@@ -40,10 +60,7 @@
     border: .5px solid #A2A2A2;
 }
 
-body{
-    background: black;
-    text-align: center;
-}
+
 
 #history{
     background: white;
@@ -58,6 +75,18 @@ body{
     background: #4C4C4C;
     color : #CAD9E0;
     font-size: xx-large;
-    height: 80px !important;
+    height: 80px;
     font-weight: bolder;
+}
+
+@media screen and (max-width: 600px) {
+    body{
+        display: block;
+        text-align: center;
+        background: white;
+    }
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+            .container .backgroundImage { display: none; }
 }

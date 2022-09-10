@@ -240,8 +240,75 @@ const generateButtons = () => {
 
 }
 
+const generateExtraFunctions = () => {
+    const extrafunc = document.createElement('div')
+    extrafunc.style.gridArea = 'extrafunc'
+    extrafunc.id = 'extrafunc'
+    buttonsContainer.appendChild(extrafunc)
+
+    const binButton = document.createElement('button')
+    binButton.id = 'btn_bin'
+    // binButton.className = 'btn'
+    binButton.textContent = 'BIN'
+    binButton.onclick = () => {
+        const val = Number.parseInt(display.value)
+        history.push(`${val} convert to BINARY => ${val.toString(2)}`)
+        updateHistoryDisplay()
+    }
+    extrafunc.appendChild(binButton)
+
+    const hexButton = document.createElement('button')
+    hexButton.textContent = 'HEX'
+    hexButton.onclick = () => {
+        const val = Number.parseInt(display.value)
+        history.push(`${val} convert to HEXADECIMAL => ${val.toString(16)}`)
+        updateHistoryDisplay()
+    }
+    extrafunc.appendChild(hexButton)
+
+    const sqrtButton = document.createElement('button')
+    sqrtButton.textContent = '√'
+    sqrtButton.onclick = () => {
+        const val = Number.parseInt(display.value)
+        history.push(`Square root of ${val} => ${Math.sqrt(val).toFixed(16)}`)
+        updateHistoryDisplay()
+    }
+    extrafunc.appendChild(sqrtButton)
+
+    const sinButton = document.createElement('button')
+    sinButton.textContent = 'sin(x)'
+    sinButton.onclick = () => {
+        const val = Number.parseInt(display.value)
+        history.push(`Sin(${val}) => ${Math.sin(val).toFixed(16)}`)
+        updateHistoryDisplay()
+    }
+    extrafunc.appendChild(sinButton)
+
+    const cosButton = document.createElement('button')
+    cosButton.id = 'btn_cos'
+    // cosButton.className = 'btn'
+    cosButton.textContent = 'cos(x)'
+    cosButton.onclick = () => {
+        const val = Number.parseInt(display.value)
+        history.push(`Cos(${val}) => ${Math.cos(val).toFixed(16)}`)
+        updateHistoryDisplay()
+    }
+    extrafunc.appendChild(cosButton)
+
+    const tanButton = document.createElement('button')
+    tanButton.textContent = 'tan(x)'
+    tanButton.onclick = () => {
+        const val = Number.parseInt(display.value)
+        history.push(`Tan(${val}) => ${Math.tan(val).toFixed(16)}`)
+        updateHistoryDisplay()
+    }
+    extrafunc.appendChild(tanButton)
+
+}
+
 
 generateHistoryDisplay(calc)
 generateDisplay(calc)
 calc.appendChild(buttonsContainer)
 generateButtons()
+generateExtraFunctions()
